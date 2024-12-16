@@ -1,0 +1,344 @@
+# 仓储管理系统（WMS）后端开发文档
+
+## 一、项目概述
+
+- **项目名称**：WMS（Warehouse Management System）
+- **开发环境**：Spring Boot、MyBatis Plus、MySQL、Redis
+- **项目结构**：采用分层架构，包括 Controller 层、Service 层、Mapper 层和 Model 层
+
+## 二、项目结构
+
+```
+com.xmut.wms
+├── controller      // 控制器层
+├── service         // 服务层接口
+│   └── impl        // 服务层实现
+├── mapper          // Mapper 接口
+├── entity          // 实体类（Model 层）
+├── config          // 配置类
+├── utils           // 工具类
+├── aspect          // 切面类（如日志记录）
+└── exception       // 异常处理
+```
+
+## 三、各层详细设计
+
+### 1. Model 层（实体类）
+
+实体类对应数据库中的表，使用 Lombok 简化代码，使用 MyBatis Plus 的注解。
+
+#### 1.1 实体类列表
+
+- **User**（用户）
+- **Role**（角色）
+- **Permission**（权限）
+- **UserRole**（用户角色关联）
+- **RolePermission**（角色权限关联）
+- **UserWarehouse**（用户仓库关联）
+- **Company**（企业信息）
+- **Warehouse**（仓库）
+- **Category**（货品类别）
+- **Product**（货品）
+- **Stock**（库存）
+- **InventoryRecord**（出入库记录）
+- **Log**（系统日志）
+- **Token**（登录 Token）
+
+#### 1.2 实体类说明
+
+- **User**
+
+  - **属性**：
+
+    | 字段名     | 数据类型   | 说明       |
+    | ---------- | ---------- | ---------- |
+    | userId     | Long       | 用户 ID    |
+    | username   | String     | 账号名     |
+    | password   | String     | 密码       |
+    | realName   | String     | 用户姓名   |
+    | status     | Integer    | 用户状态   |
+    | createTime | LocalDateTime | 创建时间   |
+    | updateTime | LocalDateTime | 更新时间   |
+
+  - **功能**：表示系统用户
+
+- **Role**
+
+  - **属性**：
+
+    | 字段名     | 数据类型   | 说明     |
+    | ---------- | ---------- | -------- |
+    | roleId     | Long       | 角色 ID  |
+    | roleName   | String     | 角色名称 |
+    | description| String     | 角色描述 |
+    | createTime | LocalDateTime | 创建时间 |
+    | updateTime | LocalDateTime | 更新时间 |
+
+  - **功能**：表示用户角色
+
+- **Permission**
+
+  - **属性**：
+
+    | 字段名         | 数据类型   | 说明       |
+    | -------------- | ---------- | ---------- |
+    | permissionId   | Long       | 权限 ID    |
+    | permissionName | String     | 权限名称   |
+    | permissionCode | String     | 权限代码   |
+    | description    | String     | 权限描述   |
+    | createTime     | LocalDateTime | 创建时间   |
+    | updateTime     | LocalDateTime | 更新时间   |
+
+  - **功能**：表示系统权限点
+
+- **其他实体类**：同理定义，包含相应的属性和说明。
+
+### 2. Mapper 层
+
+#### 2.1 Mapper 接口列表
+
+- **UserMapper**
+- **RoleMapper**
+- **PermissionMapper**
+- **UserRoleMapper**
+- **RolePermissionMapper**
+- **UserWarehouseMapper**
+- **CompanyMapper**
+- **WarehouseMapper**
+- **CategoryMapper**
+- **ProductMapper**
+- **StockMapper**
+- **InventoryRecordMapper**
+- **LogMapper**
+- **TokenMapper**
+
+#### 2.2 Mapper 接口说明
+
+- **继承**：所有 Mapper 接口均继承自 
+
+BaseMapper<T>
+
+，其中 `T` 为对应的实体类。
+- **功能**：提供基本的 CRUD 操作，可根据需要添加自定义方法。
+
+**示例**：
+
+```java
+@Mapper
+public interface UserMapper extends BaseMapper<User> {
+    // 自定义查询方法
+}
+```
+
+### 3. Service 层
+
+#### 3.1 Service 接口列表
+
+- **UserService**
+- **RoleService**
+- **PermissionService**
+- **UserRoleService**
+- **RolePermissionService**
+- **UserWarehouseService**
+- **CompanyService**
+- **WarehouseService**
+- **CategoryService**
+- **ProductService**
+- **StockService**
+- **InventoryRecordService**
+- **LogService**
+- **TokenService**
+
+#### 3.2 Service 实现类列表
+
+位于 `service.impl` 包下，对应各自的接口。
+
+- **UserServiceImpl**
+- **RoleServiceImpl**
+- **PermissionServiceImpl**
+- **...**
+
+#### 3.3 Service 层说明
+
+- **功能**：封装业务逻辑，调用 Mapper 层方法，处理事务。
+- **与其他层交互**：Service 层被 Controller 层调用，内部调用 Mapper 层。
+
+**示例**：
+
+```java
+@Service
+public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserMapper userMapper;
+
+    // 实现用户注册方法
+    @Override
+    public void register(User user) {
+        // 密码加密
+        user.setPassword(PasswordUtils.encrypt(user.getPassword()));
+        userMapper.insert(user);
+    }
+}
+```
+
+### 4. Controller 层
+
+#### 4.1 Controller 类列表
+
+- **UserController**
+- **RoleController**
+- **PermissionController**
+- **AuthController**（登录、注销）
+- **CompanyController**
+- **WarehouseController**
+- **CategoryController**
+- **ProductController**
+- **StockController**
+- **InventoryRecordController**
+- **LogController**
+- **StatisticsController**
+
+#### 4.2 Controller 层说明
+
+- **功能**：处理客户端请求，响应数据。
+- **与其他层交互**：调用 Service 层的方法，返回结果给前端。
+
+**示例**：
+
+```java
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+    @Autowired
+    private UserService userService;
+
+    // 添加新用户
+    @PostMapping
+    public ResponseResult addUser(@RequestBody User user) {
+        userService.register(user);
+        return ResponseResult.success();
+    }
+
+    // 获取用户列表
+    @GetMapping
+    public ResponseResult listUsers() {
+        List<User> users = userService.list();
+        return ResponseResult.success(users);
+    }
+}
+```
+
+### 5. 其他模块
+
+#### 5.1 工具类（utils）
+
+- **JwtUtils**：JWT Token 的生成与解析
+- **PasswordUtils**：密码加密与验证
+- **ResponseResult**：统一响应结果封装
+
+#### 5.2 配置类（config）
+
+- **MyBatisPlusConfig**：MyBatis Plus 配置
+- **RedisConfig**：Redis 配置
+- **SwaggerConfig**：Swagger API 文档配置
+
+#### 5.3 切面类（aspect）
+
+- **LogAspect**：系统日志切面，记录用户操作
+
+#### 5.4 异常处理（exception）
+
+- **GlobalExceptionHandler**：全局异常处理器
+
+## 四、功能与类的对应关系
+
+### 1. 用户管理
+
+- **UserController**：处理用户相关请求
+- **UserService**：用户业务逻辑
+- **UserMapper**：用户数据访问
+- **UserRoleService**：用户角色管理
+- **UserRoleMapper**：用户角色关联数据访问
+
+### 2. 权限管理
+
+- **RoleController**
+- **PermissionController**
+- **RoleService**
+- **PermissionService**
+- **RolePermissionService**
+- **RolePermissionMapper**
+
+### 3. 认证与授权
+
+- **AuthController**：登录、注销
+- **UserService**：验证用户
+- **TokenService**：Token 管理
+- **JwtUtils**：Token 生成与解析
+
+### 4. 企业信息管理
+
+- **CompanyController**
+- **CompanyService**
+- **CompanyMapper**
+
+### 5. 仓库管理
+
+- **WarehouseController**
+- **WarehouseService**
+- **WarehouseMapper**
+
+### 6. 货品类别管理
+
+- **CategoryController**
+- **CategoryService**
+- **CategoryMapper**
+
+### 7. 货品信息管理
+
+- **ProductController**
+- **ProductService**
+- **ProductMapper**
+- **StockService**
+- **StockMapper**
+
+### 8. 出入库管理
+
+- **InventoryRecordController**
+- **InventoryRecordService**
+- **InventoryRecordMapper**
+- **StockService**：更新库存
+- **LogAspect**：记录操作日志
+
+### 9. 数据统计分析
+
+- **StatisticsController**
+- **InventoryRecordService**：数据统计
+
+### 10. 系统日志管理
+
+- **LogController**
+- **LogService**
+- **LogMapper**
+- **LogAspect**：记录日志
+
+## 五、类之间的交互
+
+- **Controller 层**调用**Service 层**的方法，处理业务逻辑。
+- **Service 层**使用**Mapper 层**访问数据库。
+- **Service 层**之间可相互调用，如 `InventoryRecordService` 调用 `StockService`。
+- **切面**（如 `LogAspect`）可拦截 Controller 或 Service 方法，添加额外功能。
+- **工具类**（如 `JwtUtils`）可在各层中使用，提供通用功能。
+
+## 六、技术实现要点
+
+- **密码加密**：使用 `PasswordUtils`，采用 MD5 或 BCrypt 对密码进行加密。
+- **图形验证码**：在登录时生成验证码，防止暴力破解。
+- **Token 机制**：使用 JWT 实现，Token 存储在 Redis 中，有过期机制。
+- **日志记录**：使用 AOP 切面记录用户操作，日志存储在数据库或文件中。
+- **Redis 缓存**：缓存 Token、权限等，提高性能。
+- **单元测试**：使用 JUnit 对 Service 层进行测试，确保代码质量。
+
+## 七、总结
+
+本开发文档详细描述了后端各层的类文件、功能实现和交互关系。在项目开发过程中，应遵循分层架构的原则，保证代码的可读性和可维护性。通过使用 Spring Boot、MyBatis Plus、Redis 等技术，可以高效地完成仓储管理系统的开发。

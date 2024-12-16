@@ -1,0 +1,111 @@
+ 1. 用户表（xmut_user）
+字段名	数据类型	约束	说明
+user_id	INT(11)	PRIMARY KEY	用户ID
+username	VARCHAR(50)	NOT NULL, UNIQUE	账号名
+password	VARCHAR(100)	NOT NULL	密码（加密存储）
+real_name	VARCHAR(50)	NOT NULL	用户姓名
+status	TINYINT(1)	DEFAULT '1'	用户状态（1启用，0禁用）
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+2. 角色表（xmut_role）
+字段名	数据类型	约束	说明
+role_id	INT(11)	PRIMARY KEY	角色ID
+role_name	VARCHAR(50)	NOT NULL	角色名称
+description	VARCHAR(200)		角色描述
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+3. 权限表（xmut_permission）
+字段名	数据类型	约束	说明
+permission_id	INT(11)	PRIMARY KEY	权限ID
+permission_name	VARCHAR(50)	NOT NULL	权限名称（如“用户管理”）
+permission_code	VARCHAR(100)	NOT NULL	权限代码（如“user:add”）
+description	VARCHAR(200)		权限描述
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+4. 用户角色关联表（xmut_user_role）
+字段名	数据类型	约束	说明
+id	INT(11)	PRIMARY KEY	主键
+user_id	INT(11)	NOT NULL	用户ID
+role_id	INT(11)	NOT NULL	角色ID
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+5. 角色权限关联表（xmut_role_permission）
+字段名	数据类型	约束	说明
+id	INT(11)	PRIMARY KEY	主键
+role_id	INT(11)	NOT NULL	角色ID
+permission_id	INT(11)	NOT NULL	权限ID
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+6. 用户仓库关联表（xmut_user_warehouse）
+字段名	数据类型	约束	说明
+id	INT(11)	PRIMARY KEY	主键
+user_id	INT(11)	NOT NULL	用户ID
+warehouse_id	INT(11)	NOT NULL	仓库ID
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+7. 企业信息表（xmut_company）
+字段名	数据类型	约束	说明
+company_id	INT(11)	PRIMARY KEY	企业ID
+company_name	VARCHAR(100)	NOT NULL	企业名称
+address	VARCHAR(200)		企业地址
+contact_name	VARCHAR(50)		联系人姓名
+contact_phone	VARCHAR(20)		联系电话
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+8. 仓库表（xmut_warehouse）
+字段名	数据类型	约束	说明
+warehouse_id	INT(11)	PRIMARY KEY	仓库ID
+warehouse_name	VARCHAR(100)	NOT NULL	仓库名称
+address	VARCHAR(200)		仓库地址
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+9. 货品信息表（xmut_product）
+字段名	数据类型	约束	说明
+product_id	INT(11)	PRIMARY KEY	货品ID
+product_name	VARCHAR(100)	NOT NULL	货品名称
+price	DECIMAL(10,2)	NOT NULL	价格
+image_url	VARCHAR(255)		图片路径
+category_id	INT(11)	NOT NULL	类别ID
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+10. 库存表（xmut_stock）（新建表）
+字段名	数据类型	约束	说明
+id	INT(11)	PRIMARY KEY	主键
+product_id	INT(11)	NOT NULL	货品ID
+warehouse_id	INT(11)	NOT NULL	仓库ID
+stock_quantity	INT(11)	DEFAULT '0'	库存数量
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+11. 出入库记录表（xmut_inventory_record）
+字段名	数据类型	约束	说明
+record_id	INT(11)	PRIMARY KEY	记录ID
+product_id	INT(11)	NOT NULL	货品ID
+warehouse_id	INT(11)	NOT NULL	仓库ID
+quantity	INT(11)	NOT NULL	数量
+operation_type	TINYINT(1)	NOT NULL	操作类型（0入库，1出库，2调拨）
+related_record_id	INT(11)		关联记录ID（调拨对应的另一条记录）
+operator_id	INT(11)	NOT NULL	操作人用户ID
+remark	VARCHAR(200)		备注
+record_time	DATETIME	NOT NULL	操作时间
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+12. 货品类别表（xmut_category）
+字段名	数据类型	约束	说明
+category_id	INT(11)	PRIMARY KEY	类别ID
+category_name	VARCHAR(100)	NOT NULL	类别名称
+description	VARCHAR(200)		描述
+create_time	DATETIME	NOT NULL	创建时间
+update_time	DATETIME		更新时间
+13. 系统日志表（xmut_log）
+字段名	数据类型	约束	说明
+log_id	INT(11)	PRIMARY KEY	日志ID
+user_id	INT(11)		用户ID
+action	VARCHAR(200)	NOT NULL	操作内容
+ip_address	VARCHAR(20)		IP地址
+create_time	DATETIME	NOT NULL	操作时间
+14. Token表（xmut_token）（新增需求）
+字段名	数据类型	约束	说明
+user_id	INT(11)	PRIMARY KEY	用户ID
+token	VARCHAR(255)	NOT NULL	登录token
+expire_time	DATETIME	NOT NULL	过期时间
+update_time	DATETIME		更新时间

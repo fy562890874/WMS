@@ -1,0 +1,211 @@
+-- -----------------------------------------------------------------------------
+-- Table: xmut_user
+-- Description: 用户表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_user` (
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL UNIQUE,
+  `password` VARCHAR(100) NOT NULL,
+  `real_name` VARCHAR(50) NOT NULL,
+  `status` TINYINT(1) DEFAULT 1,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_role
+-- Description: 角色表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_role` (
+  `role_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `role_name` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(200),
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_permission
+-- Description: 权限表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_permission` (
+  `permission_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `permission_name` VARCHAR(50) NOT NULL,
+  `permission_code` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(200),
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_user_role
+-- Description: 用户角色关联表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_user_role` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `role_id` INT(11) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `xmut_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`role_id`) REFERENCES `xmut_role`(`role_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_role_permission
+-- Description: 角色权限关联表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_role_permission` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `role_id` INT(11) NOT NULL,
+  `permission_id` INT(11) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`role_id`) REFERENCES `xmut_role`(`role_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`permission_id`) REFERENCES `xmut_permission`(`permission_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_user_warehouse
+-- Description: 用户仓库关联表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_user_warehouse` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `warehouse_id` INT(11) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `xmut_user`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`warehouse_id`) REFERENCES `xmut_warehouse`(`warehouse_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_company
+-- Description: 企业信息表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_company` (
+  `company_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `company_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(200),
+  `contact_name` VARCHAR(50),
+  `contact_phone` VARCHAR(20),
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_warehouse
+-- Description: 仓库表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_warehouse` (
+  `warehouse_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `warehouse_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(200),
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`warehouse_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_product
+-- Description: 货品信息表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_product` (
+  `product_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `product_name` VARCHAR(100) NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `image_url` VARCHAR(255),
+  `category_id` INT(11) NOT NULL,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`product_id`),
+  FOREIGN KEY (`category_id`) REFERENCES `xmut_category`(`category_id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_stock
+-- Description: 库存表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_stock` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `product_id` INT(11) NOT NULL,
+  `warehouse_id` INT(11) NOT NULL,
+  `stock_quantity` INT(11) DEFAULT 0,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_product_warehouse` (`product_id`, `warehouse_id`),
+  FOREIGN KEY (`product_id`) REFERENCES `xmut_product`(`product_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`warehouse_id`) REFERENCES `xmut_warehouse`(`warehouse_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_inventory_record
+-- Description: 出入库记录表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_inventory_record` (
+  `record_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `product_id` INT(11) NOT NULL,
+  `warehouse_id` INT(11) NOT NULL,
+  `quantity` INT(11) NOT NULL,
+  `operation_type` TINYINT(1) NOT NULL COMMENT '0入库，1出库，2调拨',
+  `related_record_id` INT(11),
+  `operator_id` INT(11) NULL, -- 修改为 NULL
+  `remark` VARCHAR(200),
+  `record_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`record_id`),
+  FOREIGN KEY (`product_id`) REFERENCES `xmut_product`(`product_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`warehouse_id`) REFERENCES `xmut_warehouse`(`warehouse_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`operator_id`) REFERENCES `xmut_user`(`user_id`) ON DELETE SET NULL,
+  FOREIGN KEY (`related_record_id`) REFERENCES `xmut_inventory_record`(`record_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_category
+-- Description: 货品类别表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_category` (
+  `category_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `category_name` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(200),
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`category_id`),
+  UNIQUE KEY `unique_category_name` (`category_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_log
+-- Description: 系统日志表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_log` (
+  `log_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11),
+  `action` VARCHAR(200) NOT NULL,
+  `ip_address` VARCHAR(20),
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `xmut_user`(`user_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------------------
+-- Table: xmut_token
+-- Description: Token表
+-- -----------------------------------------------------------------------------
+CREATE TABLE `xmut_token` (
+  `user_id` INT(11) NOT NULL,
+  `token` VARCHAR(255) NOT NULL,
+  `expire_time` DATETIME NOT NULL,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `xmut_user`(`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
