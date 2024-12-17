@@ -10,13 +10,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     
     @Autowired
     private JwtInterceptor jwtInterceptor;
-    
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")  // 拦截所有请求
                 .excludePathPatterns(    // 排除不需要token的接口
                         "/auth/login",   
+                        "/auth/logout",
+                        "/auth/refresh-token",
                         "/users/register",
                         "/swagger-resources/**",
                         "/webjars/**",

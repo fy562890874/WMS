@@ -150,5 +150,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return true;
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return getUserByUsername(username);
+    }
+
+    @Override
+    public boolean checkPassword(User user, String password) {
+        return passwordUtils.matches(password, user.getPassword());
+    }
     
+    @Override
+    public List<Integer> getUserRoles(Integer userId) {
+        return userRoleMapper.getRoleIdsByUserId(userId);
+    }
+
+    @Override
+    public boolean isAdmin(Integer userId) {
+        List<Integer> roleIds = getUserRoles(userId);
+        // 假设角色ID为1是管理员角色（你需要根据实际情况修改这个判断条件）
+        return roleIds.contains(1);
+    }
+
 }

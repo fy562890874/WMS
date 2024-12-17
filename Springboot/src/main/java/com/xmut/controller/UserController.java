@@ -125,4 +125,41 @@ public class UserController {
         boolean result = userService.setUserWarehouses(userId, warehouseIds);
         return result ? "权限设置成功" : "权限设置失败";
     }
+
+    @ApiOperation("获取用户详情")
+    @GetMapping("/{userId}")
+    public Map<String, Object> getUserById(@PathVariable Integer userId) {
+        User user = userService.getById(userId);
+        if (user != null) {
+            user.setPassword(null); // 清除敏感信息
+            return Map.of("code", 200, "data", user);
+        }
+        return Map.of("code", 404, "message", "用户不存在");
+    }
+
+    @ApiOperation("获取用户角色列表")
+    @GetMapping("/{userId}/roles")
+    public Map<String, Object> getUserRoles(@PathVariable Integer userId) {
+        List<Integer> roleIds = userService.getUserRoles(userId);
+        return Map.of("code", 200, "data", roleIds);
+    }
+
+    @ApiOperation("更新个人信息")
+    @PutMapping("/profile")
+    public Map<String, Object> updateProfile(@RequestBody User user) {
+        User currentUser = SecurityUtils.getCurrentUser();
+        if (currentUser == null) {
+            return Map.of("code", 401, "message", "未登录");
+        }
+        // 只允许更新部分字段
+        User updateUser = new User();
+        updateUser.setUserId(currentUser.getUserId());
+        updateUser.setRealName(user.getRealName());
+        // 可以根据需求添加其他允许更新的字段
+        
+        boolean result = userService.updateUser(updateUser);
+        return result ? 
+            Map.of("code", 200, "message", "更新成功") :
+            Map.of("code", 500, "message", "更新失败");
+    }
 }

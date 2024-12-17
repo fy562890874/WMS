@@ -1,13 +1,16 @@
 package com.xmut.util;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtils {
 
-    private static final String SECRET_KEY = "YourSecretKey"; // 密钥
+    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512); // 使用 Keys 类生成密钥
     private static final long EXPIRE_TIME = 3600 * 1000; // 1 小时
 
     // 生成 Token
@@ -18,14 +21,15 @@ public class JwtUtils {
                 .setSubject(userId.toString())
                 .setIssuedAt(now)
                 .setExpiration(expireDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
     // 从 Token 中获取用户 ID
     public Integer getUserIdFromToken(String token) {
-        Claims claims = Jwts.parser()
+        Claims claims = Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
         return Integer.parseInt(claims.getSubject());
@@ -34,8 +38,9 @@ public class JwtUtils {
     // 验证 Token 是否过期
     public boolean isTokenExpired(String token) {
         try {
-            Claims claims = Jwts.parser()
+            Claims claims = Jwts.parserBuilder()
                     .setSigningKey(SECRET_KEY)
+                    .build()
                     .parseClaimsJws(token)
                     .getBody();
             return claims.getExpiration().before(new Date());
@@ -49,8 +54,9 @@ public class JwtUtils {
         if (isTokenExpired(token)) {
             throw new RuntimeException("Token已过期，无法刷新");
         }
-        Claims claims = Jwts.parser()
+        Claims claims = Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
         Integer userId = Integer.parseInt(claims.getSubject());

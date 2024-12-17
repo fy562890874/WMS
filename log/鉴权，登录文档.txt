@@ -1,0 +1,592 @@
+## 接口文档
+
+### 1. 认证管理
+
+#### 1.1 用户登录
+
+- **接口名称**: 用户登录
+- **接口URL**: `/auth/login`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **请求体** (`application/json`):
+    ```json
+    {
+      "username": "string",
+      "password": "string"
+    }
+    ```
+- **响应**:
+  - **成功** (`200`):
+    ```json
+    {
+      "code": 200,
+      "message": "登录成功",
+      "data": {
+        "token": "string",
+        "userInfo": {
+          "userId": "integer",
+          "username": "string",
+          "status": "boolean",
+          // 其他用户信息
+        }
+      }
+    }
+    ```
+  - **失败** (`401` 或 `403`):
+    ```json
+    {
+      "code": 401,
+      "message": "用户名或密码错误"
+    }
+    ```
+    或
+    ```json
+    {
+      "code": 403,
+      "message": "账户已被禁用"
+    }
+    ```
+
+#### 1.2 用户退出登录
+
+- **接口名称**: 用户退出登录
+- **接口URL**: `/auth/logout`
+- **请求方法**: `POST`
+- **请求参数**: 无
+- **响应**:
+  ```json
+  {
+    "code": 200,
+    "message": "退出成功"
+  }
+  ```
+
+#### 1.3 刷新Token
+
+- **接口名称**: 刷新Token
+- **接口URL**: `/auth/refresh-token`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **请求头**:
+    - `Authorization`: `Bearer {token}`
+- **响应**:
+  - **成功** (`200`):
+    ```json
+    {
+      "code": 200,
+      "message": "刷新成功",
+      "data": {
+        "token": "string"
+      }
+    }
+    ```
+  - **失败** (`400`):
+    ```json
+    {
+      "code": 400,
+      "message": "token无效"
+    }
+    ```
+
+### 2. 用户鉴权机制（JWT）
+
+- **认证方式**: 使用JWT进行认证。
+- **获取Token**: 用户通过 `/auth/login` 接口登录后获取Token。
+- **使用Token**:
+  - 在后续请求中，将Token放入请求头 `Authorization` 中，格式为 `Bearer {token}`。
+  - 示例:
+    ```
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
+    ```
+- **Token刷新**: Token到期前，通过 `/auth/refresh-token` 接口刷新Token。
+
+### 3. 角色管理
+
+#### 3.1 获取所有角色
+
+- **接口名称**: 获取所有角色
+- **接口URL**: `/roles`
+- **请求方法**: `GET`
+- **请求参数**: 无
+- **响应**:
+  ```json
+  [
+    {
+      "roleId": "integer",
+      "roleName": "string",
+      // 其他角色信息
+    },
+    // 更多角色
+  ]
+  ```
+
+#### 3.2 添加角色
+
+- **接口名称**: 添加角色
+- **接口URL**: `/roles`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **请求体** (`application/json`):
+    ```json
+    {
+      "roleName": "string",
+      // 其他角色信息
+    }
+    ```
+- **响应**:
+  - **成功**:
+    ```json
+    "Add successful"
+    ```
+  - **失败**:
+    ```json
+    "Add failed"
+    ```
+
+#### 3.3 更新角色信息
+
+- **接口名称**: 更新角色信息
+- **接口URL**: `/roles`
+- **请求方法**: `PUT`
+- **请求参数**:
+  - **请求体** (`application/json`):
+    ```json
+    {
+      "roleId": "integer",
+      "roleName": "string",
+      // 其他角色信息
+    }
+    ```
+- **响应**:
+  - **成功**:
+    ```json
+    "Update successful"
+    ```
+  - **失败**:
+    ```json
+    "Update failed"
+    ```
+
+#### 3.4 删除角色
+
+- **接口名称**: 删除角色
+- **接口URL**: `/roles/{roleId}`
+- **请求方法**: `DELETE`
+- **请求参数**:
+  - **路径参数**:
+    - 
+
+roleId
+
+ (`integer`): 角色ID
+- **响应**:
+  - **成功**:
+    ```json
+    "Delete successful"
+    ```
+  - **失败**:
+    ```json
+    "Delete failed"
+    ```
+
+### 4. 用户管理
+
+#### 4.1 获取所有用户
+
+- **接口名称**: 获取所有用户
+- **接口URL**: `/users`
+- **请求方法**: `GET`
+- **请求参数**: 无
+- **响应**:
+  ```json
+  [
+    {
+      "userId": "integer",
+      "username": "string",
+      "status": "boolean",
+      // 其他用户信息
+    },
+    // 更多用户
+  ]
+  ```
+
+#### 4.2 添加用户
+
+- **接口名称**: 添加用户
+- **接口URL**: `/users`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **请求体** (`application/json`):
+    ```json
+    {
+      "username": "string",
+      "password": "string",
+      "status": "boolean",
+      // 其他用户信息
+    }
+    ```
+- **响应**:
+  - **成功**:
+    ```json
+    "Add successful"
+    ```
+  - **失败**:
+    ```json
+    "Add failed"
+    ```
+
+#### 4.3 更新用户信息
+
+- **接口名称**: 更新用户信息
+- **接口URL**: `/users`
+- **请求方法**: `PUT`
+- **请求参数**:
+  - **请求体** (`application/json`):
+    ```json
+    {
+      "userId": "integer",
+      "username": "string",
+      "status": "boolean",
+      // 其他用户信息
+    }
+    ```
+- **响应**:
+  - **成功**:
+    ```json
+    "Update successful"
+    ```
+  - **失败**:
+    ```json
+    "Update failed"
+    ```
+
+#### 4.4 删除用户
+
+- **接口名称**: 删除用户
+- **接口URL**: `/users/{userId}`
+- **请求方法**: `DELETE`
+- **请求参数**:
+  - **路径参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+- **响应**:
+  - **成功**:
+    ```json
+    "Delete successful"
+    ```
+  - **失败**:
+    ```json
+    "Delete failed"
+    ```
+
+#### 4.5 重置密码
+
+- **接口名称**: 重置密码
+- **接口URL**: `/users/resetPassword`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **查询参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+    - 
+
+newPassword
+
+ (`string`): 新密码
+- **响应**:
+  - **成功** (`200`):
+    ```json
+    {
+      "code": 200,
+      "message": "密码重置成功"
+    }
+    ```
+  - **失败** (`500`):
+    ```json
+    {
+      "code": 500,
+      "message": "密码重置失败"
+    }
+    ```
+
+#### 4.6 分配角色
+
+- **接口名称**: 分配角色
+- **接口URL**: `/users/assignRoles`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **查询参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+  - **请求体** (`application/json`):
+    ```json
+    [ "integer", "integer", ... ]  // 角色ID列表
+    ```
+- **响应**:
+  - **成功**:
+    ```json
+    "Roles assigned successfully"
+    ```
+  - **失败**:
+    ```json
+    "Roles assignment failed"
+    ```
+
+#### 4.7 启用用户
+
+- **接口名称**: 启用用户
+- **接口URL**: `/users/enable/{userId}`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **路径参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+- **响应**:
+  - **成功**:
+    ```json
+    "User enabled"
+    ```
+  - **失败**:
+    ```json
+    "Operation failed"
+    ```
+
+#### 4.8 禁用用户
+
+- **接口名称**: 禁用用户
+- **接口URL**: `/users/disable/{userId}`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **路径参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+- **响应**:
+  - **成功**:
+    ```json
+    "User disabled"
+    ```
+  - **失败**:
+    ```json
+    "Operation failed"
+    ```
+
+#### 4.9 用户注册
+
+- **接口名称**: 用户注册
+- **接口URL**: `/users/register`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **请求体** (`application/json`):
+    ```json
+    {
+      "username": "string",
+      "password": "string",
+      // 其他用户信息
+    }
+    ```
+- **响应**:
+  - **成功** (`200`):
+    ```json
+    {
+      "code": 200,
+      "message": "注册成功"
+    }
+    ```
+  - **失败** (`400` 或 `500`):
+    ```json
+    {
+      "code": 400,
+      "message": "用户名已被占用"
+    }
+    ```
+    或
+    ```json
+    {
+      "code": 500,
+      "message": "注册失败"
+    }
+    ```
+
+#### 4.10 获取当前用户信息
+
+- **接口名称**: 获取当前用户信息
+- **接口URL**: `/users/current`
+- **请求方法**: `GET`
+- **请求参数**: 无
+- **响应**:
+  ```json
+  {
+    "code": 200,
+    "data": {
+      "userId": "integer",
+      "username": "string",
+      "status": "boolean",
+      // 其他用户信息
+    }
+  }
+  ```
+
+#### 4.11 修改密码
+
+- **接口名称**: 修改密码
+- **接口URL**: `/users/changePassword`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **查询参数**:
+    - 
+
+oldPassword
+
+ (`string`): 旧密码
+    - 
+
+newPassword
+
+ (`string`): 新密码
+- **响应**:
+  - **成功** (`200`):
+    ```json
+    {
+      "code": 200,
+      "message": "密码修改成功"
+    }
+    ```
+  - **失败** (`400`):
+    ```json
+    {
+      "code": 400,
+      "message": "原密码错误"
+    }
+    ```
+
+#### 4.12 获取用户仓库权限
+
+- **接口名称**: 获取用户仓库权限
+- **接口URL**: `/users/{userId}/warehouses`
+- **请求方法**: `GET`
+- **请求参数**:
+  - **路径参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+- **响应**:
+  ```json
+  [
+    {
+      "warehouseId": "integer",
+      "warehouseName": "string",
+      // 其他仓库信息
+    },
+    // 更多仓库
+  ]
+  ```
+
+#### 4.13 设置用户仓库权限
+
+- **接口名称**: 设置用户仓库权限
+- **接口URL**: `/users/{userId}/warehouses`
+- **请求方法**: `POST`
+- **请求参数**:
+  - **路径参数**:
+    - 
+
+userId
+
+ (`integer`): 用户ID
+  - **请求体** (`application/json`):
+    ```json
+    [ "integer", "integer", ... ]  // 仓库ID列表
+    ```
+- **响应**:
+  - **成功**:
+    ```json
+    "权限设置成功"
+    ```
+  - **失败**:
+    ```json
+    "权限设置失败"
+    ```
+
+### 5. 前端鉴权指南
+
+1. **登录流程**:
+   - 前端发送 `POST` 请求到 `/auth/login`，携带用户名和密码。
+   - 成功后，后端返回 
+
+token
+
+。
+   - 前端将 
+
+token
+
+ 存储（如 `localStorage` 或 `sessionStorage`）。
+
+2. **请求鉴权**:
+   - 每次向需要鉴权的接口发送请求时，在请求头中加入 `Authorization` 字段，格式为 `Bearer {token}`。
+   - 示例:
+     ```
+     Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
+     ```
+
+3. **Token刷新**:
+   - Token即将过期时，前端可调用 `/auth/refresh-token` 接口，传递当前 
+
+token
+
+ 以获取新的 
+
+token
+
+。
+   - 更新存储中的 
+
+token
+
+。
+
+4. **登出流程**:
+   - 前端发送 `POST` 请求到 `/auth/logout`。
+   - 清除本地存储的 
+
+token
+
+。
+
+5. **访问受保护接口**:
+   - 确保在请求头中包含有效的 `Authorization`。
+   - 后端通过 
+
+JwtInterceptor
+
+ 验证 
+
+token
+
+。
+   - 若 
+
+token
+
+ 无效或缺失，后端将返回错误，前端需处理相应逻辑（如重定向到登录页）。
+
+---
+
+确保所有受保护的接口都在请求头中包含有效的 `Authorization`，以便后端能够正确进行身份验证和授权。

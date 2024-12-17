@@ -9,7 +9,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
+import java.nio.charset.StandardCharsets;
 
 @Api(tags = "认证管理")
 @RestController
@@ -23,37 +26,50 @@ public class LoginController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private PasswordUtils passwordUtils; // 添加这行
+    private PasswordUtils passwordUtils;
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody Map<String, String> loginData) {
-        String username = loginData.get("username");
-        String password = loginData.get("password");
+    public Map<String, Object> login(@RequestBody Map<String, String> loginForm) {
+        String username = loginForm.get("username");
+        String encodedPassword = loginForm.get("password");
+        System.out.println("收到的登录请求: 用户名=" + username + ", 密码=" + encodedPassword);
 
-        User user = userService.getUserByUsername(username);
-        if (user == null || !passwordUtils.matches(password, user.getPassword())) {
-            return Map.of("code", 401, "message", "用户名或密码错误");
+        // 验证用户名和密码
+        User user = userService.findByUsername(username);
+        if (user != null) {
+            System.out.println("找到用户: " + user);
+            System.out.println("用户密码: " + user.getPassword());
+            // 解码前端传来的 Base64 编码后的密码
+            String decodedPassword = new String(Base64.getDecoder().decode(encodedPassword), StandardCharsets.UTF_8);
+            System.out.println("解码后的密码: " + decodedPassword);
+            boolean passwordMatches = passwordUtils.matches(decodedPassword, user.getPassword());
+            System.out.println("密码匹配结果: " + passwordMatches);
+            if (passwordMatches) {
+                String token = jwtUtils.generateToken(user.getUserId());
+                Map<String, Object> data = new HashMap<>();
+                data.put("token", token);
+                data.put("userInfo", user);
+                Map<String, Object> response = new HashMap<>();
+                response.put("code", 200);
+                response.put("message", "登录成功");
+                response.put("data", data);
+                System.out.println("登录成功: " + response);
+                return response;
+            } else {
+                System.out.println("密码不匹配或Base64解码失败");
+                Map<String, Object> response = new HashMap<>();
+                response.put("code", 401);
+                response.put("message", "用户名或密码错误");
+                return response;
+            }
+        } else {
+            System.out.println("用户不存在");
+            Map<String, Object> response = new HashMap<>();
+            response.put("code", 401);
+            response.put("message", "用户名或密码错误");
+            return response;
         }
-
-        if (!user.getStatus()) {
-            return Map.of("code", 403, "message", "账户已被禁用");
-        }
-
-        // 生成token
-        String token = jwtUtils.generateToken(user.getUserId());
-
-        // 清理敏感信息
-        user.setPassword(null);
-
-        return Map.of(
-            "code", 200,
-            "message", "登录成功",
-            "data", Map.of(
-                "token", token,
-                "userInfo", user
-            )
-        );
     }
 
     @ApiOperation("退出登录")

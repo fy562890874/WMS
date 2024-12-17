@@ -1,32 +1,272 @@
-2024-12-03 11:27:51 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 11272 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
-2024-12-03 11:27:51 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
-2024-12-03 11:27:51 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
-2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
-2024-12-03 11:27:54 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8899 (http)
-2024-12-03 11:27:54 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8899"]
-2024-12-03 11:27:54 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2024-12-03 11:27:54 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-2024-12-03 11:27:54 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
-2024-12-03 11:27:54 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2359 ms
-2024-12-03 11:27:55 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2024-12-03 11:27:55 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-2024-12-03 11:27:55 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8899"]
-2024-12-03 11:27:55 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8899 (http) with context path '/springboot-20'
-2024-12-03 11:27:55 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
-2024-12-03 11:27:55 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
-2024-12-03 11:27:55 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
-2024-12-03 11:27:55 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 4.802 seconds (JVM running for 5.885)
+2024-12-17 10:11:11 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 36736 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-17 10:11:11 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-17 10:11:11 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:11:11 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-17 10:11:12 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2024-12-17 10:11:12 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:11:12 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-17 10:11:12 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-17 10:11:12 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-17 10:11:12 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1020 ms
+2024-12-17 10:11:13 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-17 10:11:13 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-17 10:11:13 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:11:13 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path '/springboot-20'
+2024-12-17 10:11:13 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-17 10:11:13 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-17 10:11:13 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-17 10:11:13 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 2.621 seconds (JVM running for 3.321)
+2024-12-17 10:11:28 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17 10:11:28 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-17 10:11:28 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2024-12-17 10:11:28 [http-nio-8082-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-17 10:11:28 [http-nio-8082-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4c45b3c0 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@120b0f42 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@cae5855 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@fcf022e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@478f434 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4ec39ae6 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@30d11f9b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@47f8a5dd (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4e22042 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:14:34 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@56248e92 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6c65f85c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@475f7021 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6708cec4 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@48f2e997 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3d2c4b01 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7ff0813a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@205bb986 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@56b4a662 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7dd9e050 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:17:30 [http-nio-8082-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6db4780 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@84567e6 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@122f14b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4e0c76ca (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2ea22c14 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@13521f40 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@56c0cc8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@28fb9089 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1786db0e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@142d7ea1 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:22:22 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@71422aa0 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@243666c5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@61839673 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2758ed49 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1ad6414f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4b238ff (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@79ff1614 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@192d9ec7 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@31597894 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2439db80 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:42:56 [http-nio-8082-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@257736a5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2024-12-17 10:44:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-17 10:44:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-17 10:45:36 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 33056 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-17 10:45:36 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-17 10:45:36 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:45:37 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-17 10:45:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2024-12-17 10:45:37 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:45:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-17 10:45:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-17 10:45:37 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-17 10:45:37 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1014 ms
+2024-12-17 10:45:38 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-17 10:45:38 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-17 10:45:38 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:45:38 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path '/springboot-20'
+2024-12-17 10:45:38 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-17 10:45:38 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-17 10:45:38 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-17 10:45:38 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 2.562 seconds (JVM running for 3.197)
+2024-12-17 10:48:09 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17 10:48:09 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-17 10:48:09 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-12-17 10:48:09 [http-nio-8082-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-17 10:48:09 [http-nio-8082-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-17 10:51:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-17 10:51:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-17 10:51:16 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 21688 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-17 10:51:16 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-17 10:51:16 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:51:17 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-17 10:51:17 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2024-12-17 10:51:17 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:51:17 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-17 10:51:17 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-17 10:51:18 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-17 10:51:18 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1325 ms
+2024-12-17 10:51:19 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-17 10:51:19 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-17 10:51:19 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:51:19 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path '/springboot-20'
+2024-12-17 10:51:19 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-17 10:51:19 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-17 10:51:19 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-17 10:51:19 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 3.364 seconds (JVM running for 3.873)
+2024-12-17 10:51:51 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17 10:51:51 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-17 10:51:51 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-12-17 10:51:51 [http-nio-8082-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-17 10:51:51 [http-nio-8082-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-17 10:52:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-17 10:52:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-17 10:53:52 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 43608 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-17 10:53:52 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-17 10:53:52 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 10:53:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-17 10:53:53 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2024-12-17 10:53:53 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:53:53 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-17 10:53:53 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-17 10:53:53 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-17 10:53:53 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1086 ms
+2024-12-17 10:53:54 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-17 10:53:54 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-17 10:53:54 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2024-12-17 10:53:54 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path '/springboot-20'
+2024-12-17 10:53:54 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-17 10:53:54 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-17 10:53:54 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-17 10:53:54 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 2.756 seconds (JVM running for 3.449)
+2024-12-17 11:04:49 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 19172 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-17 11:04:49 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-17 11:04:49 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:04:50 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-17 11:04:51 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2024-12-17 11:04:51 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2024-12-17 11:04:51 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-17 11:04:51 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-17 11:04:51 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-17 11:04:51 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1645 ms
+2024-12-17 11:04:52 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-17 11:04:52 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-17 11:04:52 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2024-12-17 11:04:52 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path '/springboot-20'
+2024-12-17 11:04:52 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-17 11:04:52 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-17 11:04:52 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-17 11:04:52 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 3.709 seconds (JVM running for 4.414)
+2024-12-17 11:05:35 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17 11:05:35 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-17 11:05:35 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-12-17 11:05:35 [http-nio-8082-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-17 11:05:35 [http-nio-8082-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-17 11:11:57 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-17 11:11:57 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-17 11:16:33 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 596 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-17 11:16:33 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-17 11:16:33 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-17 11:16:34 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-17 11:16:35 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2024-12-17 11:16:35 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2024-12-17 11:16:35 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-17 11:16:35 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-17 11:16:35 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-17 11:16:35 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1536 ms
+2024-12-17 11:16:36 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-17 11:16:36 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 6a8189a4-84b1-414f-9294-9c20d344989e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-12-17 11:16:36 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7ff09659, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@517fbf62, org.springframework.security.web.context.SecurityContextPersistenceFilter@10d98940, org.springframework.security.web.header.HeaderWriterFilter@1a7e799e, org.springframework.web.filter.CorsFilter@65db548, org.springframework.security.web.authentication.logout.LogoutFilter@66e1b2a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@32a033b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2f471037, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@150f41b9, org.springframework.security.web.session.SessionManagementFilter@7a3643e3, org.springframework.security.web.access.ExceptionTranslationFilter@6afeaf2d]
+2024-12-17 11:16:36 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-17 11:16:36 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2024-12-17 11:16:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path '/springboot-20'
+2024-12-17 11:16:36 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-17 11:16:36 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-17 11:16:36 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-17 11:16:37 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 3.927 seconds (JVM running for 4.695)
+2024-12-17 11:16:47 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-17 11:16:47 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-17 11:16:47 [http-nio-8082-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-12-17 11:16:47 [http-nio-8082-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-17 11:16:47 [http-nio-8082-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.

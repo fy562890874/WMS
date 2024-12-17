@@ -1,0 +1,32 @@
+2024-12-03 11:27:51 [main] INFO  com.xmut.WMSApplication - Starting WMSApplication using Java 17.0.10 on LAPTOP-H6G5ECNO with PID 11272 (E:\WMS\Springboot\target\classes started by Fy in E:\WMS\Springboot)
+2024-12-03 11:27:51 [main] DEBUG com.xmut.WMSApplication - Running with Spring Boot v2.7.6, Spring v5.3.24
+2024-12-03 11:27:51 [main] INFO  com.xmut.WMSApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryMapper' and 'com.xmut.mapper.CategoryMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'companyMapper' and 'com.xmut.mapper.CompanyMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'inventoryRecordMapper' and 'com.xmut.mapper.InventoryRecordMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'logMapper' and 'com.xmut.mapper.LogMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'permissionMapper' and 'com.xmut.mapper.PermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'productMapper' and 'com.xmut.mapper.ProductMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'roleMapper' and 'com.xmut.mapper.RoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'rolePermissionMapper' and 'com.xmut.mapper.RolePermissionMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'stockMapper' and 'com.xmut.mapper.StockMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'tokenMapper' and 'com.xmut.mapper.TokenMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userMapper' and 'com.xmut.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userRoleMapper' and 'com.xmut.mapper.UserRoleMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'userWarehouseMapper' and 'com.xmut.mapper.UserWarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'warehouseMapper' and 'com.xmut.mapper.WarehouseMapper' mapperInterface. Bean already defined with the same name!
+2024-12-03 11:27:53 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xmut.mapper]' package. Please check your configuration.
+2024-12-03 11:27:54 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8899 (http)
+2024-12-03 11:27:54 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8899"]
+2024-12-03 11:27:54 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-03 11:27:54 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+2024-12-03 11:27:54 [main] INFO  o.a.c.c.C.[.[.[/springboot-20] - Initializing Spring embedded WebApplicationContext
+2024-12-03 11:27:54 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2359 ms
+2024-12-03 11:27:55 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-12-03 11:27:55 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-03 11:27:55 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8899"]
+2024-12-03 11:27:55 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8899 (http) with context path '/springboot-20'
+2024-12-03 11:27:55 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2024-12-03 11:27:55 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2024-12-03 11:27:55 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2024-12-03 11:27:55 [main] INFO  com.xmut.WMSApplication - Started WMSApplication in 4.802 seconds (JVM running for 5.885)

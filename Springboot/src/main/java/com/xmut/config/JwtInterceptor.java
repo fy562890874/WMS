@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
@@ -18,41 +19,58 @@ public class JwtInterceptor implements HandlerInterceptor {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UserService userService;  // 添加UserService注入
+    private UserService userService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String token = request.getHeader("Authorization");
-        if (token == null || token.isEmpty()) {
-            throw new RuntimeException("未登录");
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        String requestURI = request.getRequestURI();
+        if (requestURI.equals("/auth/login") || requestURI.equals("/auth/logout") || requestURI.equals("/auth/refresh-token")) {
+            return true; // 不拦截登录、登出和刷新 token 请求
         }
 
-        // 验证token
+        String token = request.getHeader("Authorization");
+        if (token == null || token.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"code\":401,\"message\":\"未登录\"}");
+            return false;
+        }
+
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);
         }
 
         try {
             Integer userId = jwtUtils.getUserIdFromToken(token);
-            // 验证用户是否存在且状态正常
             User user = userService.getById(userId);
             if (user == null) {
-                throw new RuntimeException("用户不存在");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{\"code\":401,\"message\":\"用户不存在\"}");
+                return false;
             }
             if (!user.getStatus()) {
-                throw new RuntimeException("用户已被禁用");
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{\"code\":403,\"message\":\"用户已被禁用\"}");
+                return false;
             }
-            // 将用户ID存入上下文
             UserContext.setUserId(userId);
             return true;
         } catch (Exception e) {
-            throw new RuntimeException("token无效");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"code\":401,\"message\":\"token无效\"}");
+            return false;
         }
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        // 清理用户上下文
         UserContext.clear();
     }
 }
