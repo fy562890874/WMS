@@ -33,4 +33,7 @@ public class User {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "用户角色(1:超级管理员 2:信息管理员)")
+    private Integer role;
 }

@@ -45,4 +45,7 @@ public class InventoryRecord {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
-}
+
+    @ApiModelProperty(value = "对接人")
+    private String contactPerson;
+}   

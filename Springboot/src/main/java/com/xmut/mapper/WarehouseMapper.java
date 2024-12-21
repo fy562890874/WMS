@@ -10,7 +10,7 @@ import java.util.List;
 public interface WarehouseMapper extends BaseMapper<Warehouse> {
 
     // 查询所有仓库
-    @Select("SELECT * FROM xmut_warehouse")
+    @Select("SELECT * FROM xmut_warehouse ORDER BY create_time DESC")
     List<Warehouse> getAllWarehouses();
 
     // 根据ID查询仓库
@@ -19,12 +19,15 @@ public interface WarehouseMapper extends BaseMapper<Warehouse> {
 
     // 添加仓库
     @Insert("INSERT INTO xmut_warehouse(warehouse_name, address, create_time) " +
-            "VALUES(#{warehouseName}, #{address}, NOW())")
+            "VALUES(#{warehouseName}, #{address}, #{createTime})")
     @Options(useGeneratedKeys = true, keyProperty = "warehouseId")
     int addWarehouse(Warehouse warehouse);
 
     // 更新仓库信息
-    @Update("UPDATE xmut_warehouse SET warehouse_name = #{warehouseName}, address = #{address}, update_time = NOW() " +
+    @Update("UPDATE xmut_warehouse SET " +
+            "warehouse_name = #{warehouseName}, " +
+            "address = #{address}, " +
+            "update_time = #{updateTime} " +
             "WHERE warehouse_id = #{warehouseId}")
     int updateWarehouse(Warehouse warehouse);
 

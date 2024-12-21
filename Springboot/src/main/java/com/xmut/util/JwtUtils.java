@@ -62,4 +62,21 @@ public class JwtUtils {
         Integer userId = Integer.parseInt(claims.getSubject());
         return generateToken(userId);
     }
+
+    // 从 Token 中获取用户名
+    public String getUsernameFromToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                                .setSigningKey(SECRET_KEY)
+                                .parseClaimsJws(token)
+                                .getBody();
+            return claims.getSubject();
+        } catch (SignatureException e) {
+            // 处理签名异常
+            return null;
+        } catch (Exception e) {
+            // 处理其他异常
+            return null;
+        }
+    }
 }

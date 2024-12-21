@@ -8,8 +8,12 @@ import com.xmut.mapper.StockMapper;
 import com.xmut.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class InventoryServiceImpl extends ServiceImpl<InventoryRecordMapper, InventoryRecord> implements InventoryService {
@@ -71,6 +75,76 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryRecordMapper, Inv
         baseMapper.updateInventoryRecord(outRecord);
         baseMapper.updateInventoryRecord(inRecord);
         return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean transferStock(Integer productId, Integer fromWarehouseId, 
+                               Integer toWarehouseId, Integer quantity,
+                               Integer operatorId, String remark) {
+        // 检查库存是否足够
+        if (!checkStock(productId, fromWarehouseId, quantity)) {
+            return false;
+        }
+        
+        // 执行出库操作
+        InventoryRecord outRecord = new InventoryRecord();
+        outRecord.setProductId(productId);
+        outRecord.setWarehouseId(fromWarehouseId);
+        outRecord.setQuantity(quantity);
+        outRecord.setOperationType((byte)1); // 出库
+        outRecord.setOperatorId(operatorId);
+        outRecord.setRemark("调拨出库：" + remark);
+        
+        boolean outResult = stockOut(outRecord);
+        if (!outResult) {
+            return false;
+        }
+        
+        // 执行入库操作
+        InventoryRecord inRecord = new InventoryRecord();
+        inRecord.setProductId(productId);
+        inRecord.setWarehouseId(toWarehouseId);
+        inRecord.setQuantity(quantity);
+        inRecord.setOperationType((byte)0); // 入库
+        inRecord.setOperatorId(operatorId);
+        inRecord.setRemark("调拨入库：" + remark);
+        
+        boolean inResult = stockIn(inRecord);
+        if (!inResult) {
+            throw new RuntimeException("调拨入库失败");
+        }
+        
+        // 关联出入库记录
+        outRecord.setRelatedRecordId(inRecord.getRecordId());
+        inRecord.setRelatedRecordId(outRecord.getRecordId());
+        baseMapper.updateInventoryRecord(outRecord);
+        baseMapper.updateInventoryRecord(inRecord);
+        
+        return true;
+    }
+
+    @Override
+    public List<Map<String, Object>> getStockChanges(Integer productId, 
+                                                    String startTime, 
+                                                    String endTime) {
+        List<InventoryRecord> records = baseMapper.getInventoryRecordsByConditions(
+            startTime, endTime, productId, null, null);
+            
+        List<Map<String, Object>> changes = new ArrayList<>();
+        for (InventoryRecord record : records) {
+            Map<String, Object> change = new HashMap<>();
+            change.put("recordId", record.getRecordId());
+            change.put("quantity", record.getQuantity());
+            change.put("operationType", record.getOperationType());
+            change.put("warehouseId", record.getWarehouseId());
+            change.put("operatorId", record.getOperatorId());
+            change.put("recordTime", record.getRecordTime());
+            change.put("remark", record.getRemark());
+            changes.add(change);
+        }
+        
+        return changes;
     }
 
     @Override

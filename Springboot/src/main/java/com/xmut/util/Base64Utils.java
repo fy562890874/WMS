@@ -1,11 +1,16 @@
 package com.xmut.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Base64Utils {
 
+    private static final Logger logger = LoggerFactory.getLogger(Base64Utils.class);
+    
     private static final String BASE64_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
     public static byte[] decode(String base64) {
-        System.out.println("开始解码 Base64: " + base64);
+        logger.debug("开始解码 Base64: {}", base64);
         // 移除可能的填充字符
         base64 = base64.replace("=", "");
         int length = base64.length();
@@ -34,8 +39,16 @@ public class Base64Utils {
             }
         }
 
-        System.out.println("解码后的字节数组: " + java.util.Arrays.toString(decodedBytes));
-        return decodedBytes;
+        // 处理多余的字节
+        byte[] result = new byte[byteIndex];
+        System.arraycopy(decodedBytes, 0, result, 0, byteIndex);
+        
+        logger.debug("解码后的字节数组: {}", java.util.Arrays.toString(result));
+        return result;
+    }
+
+    public static String decodeToString(String base64) {
+        return new String(decode(base64), java.nio.charset.StandardCharsets.UTF_8);
     }
 
     public static String encode(byte[] bytes) {
@@ -62,6 +75,7 @@ public class Base64Utils {
             base64.append('=');
         }
 
+        logger.debug("编码后的 Base64 字符串: {}", base64.toString());
         return base64.toString();
     }
 }

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,42 +19,58 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
-    @ApiOperation("Stock in")
+    @ApiOperation("入库操作")
     @PostMapping("/stockIn")
-    public String stockIn(@RequestBody InventoryRecord record) {
+    public Map<String, Object> stockIn(@RequestBody InventoryRecord record) {
+        Map<String, Object> response = new HashMap<>();
         boolean result = inventoryService.stockIn(record);
-        return result ? "Stock in successful" : "Stock in failed";
+        response.put("success", result);
+        response.put("message", result ? "入库成功" : "入库失败");
+        return response;
     }
 
-    @ApiOperation("Stock out")
+    @ApiOperation("出库操作")
     @PostMapping("/stockOut")
-    public String stockOut(@RequestBody InventoryRecord record) {
+    public Map<String, Object> stockOut(@RequestBody InventoryRecord record) {
+        Map<String, Object> response = new HashMap<>();
         boolean result = inventoryService.stockOut(record);
-        return result ? "Stock out successful" : "Stock out failed";
+        response.put("success", result);
+        response.put("message", result ? "出库成功" : "出库失败");
+        return response;
     }
 
-    @ApiOperation("Transfer stock")
+    @ApiOperation("调拨操作")
     @PostMapping("/transfer")
-    public String transferStock(@RequestBody InventoryRecord outRecord, @RequestBody InventoryRecord inRecord) {
-        boolean result = inventoryService.transferStock(outRecord, inRecord);
-        return result ? "Transfer successful" : "Transfer failed";
+    public Map<String, Object> transferStock(@RequestBody Map<String, Object> params) {
+        Integer productId = (Integer) params.get("productId");
+        Integer fromWarehouseId = (Integer) params.get("fromWarehouseId");
+        Integer toWarehouseId = (Integer) params.get("toWarehouseId");
+        Integer quantity = (Integer) params.get("quantity");
+        Integer operatorId = (Integer) params.get("operatorId");
+        String remark = (String) params.get("remark");
+
+        Map<String, Object> response = new HashMap<>();
+        boolean result = inventoryService.transferStock(
+            productId, fromWarehouseId, toWarehouseId, quantity, operatorId, remark);
+        response.put("success", result);
+        response.put("message", result ? "调拨成功" : "调拨失败");
+        return response;
     }
 
-    @ApiOperation("Get all inventory records")
+    @ApiOperation("获取出入库记录")
     @GetMapping("/records")
-    public List<InventoryRecord> getAllInventoryRecords() {
-        return inventoryService.getAllInventoryRecords();
-    }
-
-    @ApiOperation("Get inventory records by conditions")
-    @GetMapping("/records/conditions")
-    public List<InventoryRecord> getInventoryRecordsByConditions(
+    public Map<String, Object> getInventoryRecords(
             @RequestParam(required = false) String startTime,
             @RequestParam(required = false) String endTime,
             @RequestParam(required = false) Integer productId,
             @RequestParam(required = false) Integer warehouseId,
             @RequestParam(required = false) Byte operationType) {
-        return inventoryService.getInventoryRecordsByConditions(startTime, endTime, productId, warehouseId, operationType);
+        Map<String, Object> response = new HashMap<>();
+        List<InventoryRecord> records = inventoryService.getInventoryRecordsByConditions(
+                startTime, endTime, productId, warehouseId, operationType);
+        response.put("success", true);
+        response.put("data", records);
+        return response;
     }
 
     @ApiOperation("检查库存")
@@ -75,5 +92,19 @@ public class InventoryController {
             @RequestParam Integer productId,
             @RequestParam Integer warehouseId) {
         return inventoryService.getStock(productId, warehouseId);
+    }
+
+    @ApiOperation("获取库存变动记录")
+    @GetMapping("/changes")
+    public Map<String, Object> getStockChanges(
+            @RequestParam Integer productId,
+            @RequestParam(required = false) String startTime,
+            @RequestParam(required = false) String endTime) {
+        Map<String, Object> response = new HashMap<>();
+        List<Map<String, Object>> changes = inventoryService.getStockChanges(
+            productId, startTime, endTime);
+        response.put("success", true);
+        response.put("data", changes);
+        return response;
     }
 }

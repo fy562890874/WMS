@@ -7,7 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "货品管理")
 @RestController
@@ -19,8 +21,20 @@ public class ProductController {
 
     @ApiOperation("Get all products")
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public Map<String, Object> getAllProducts(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) Integer warehouseId) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Map<String, Object>> products = productService.getProductsByCondition(keyword, categoryId, warehouseId);
+            response.put("success", true);
+            response.put("data", products);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "获取货品列表失败");
+        }
+        return response;
     }
 
     @ApiOperation("Add product")
@@ -46,9 +60,21 @@ public class ProductController {
 
     @ApiOperation("Adjust stock")
     @PostMapping("/adjustStock")
-    public String adjustStock(@RequestParam Integer productId, @RequestParam Integer warehouseId, @RequestParam Integer quantity) {
-        boolean result = productService.adjustStock(productId, warehouseId, quantity);
-        return result ? "Stock adjustment successful" : "Stock adjustment failed";
+    public Map<String, Object> adjustStock(@RequestBody Map<String, Object> params) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            boolean result = productService.adjustStock(
+                (Integer) params.get("productId"),
+                (Integer) params.get("warehouseId"),
+                (Integer) params.get("quantity")
+            );
+            response.put("success", result);
+            response.put("message", result ? "库存调整成功" : "库存调整失败");
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "库存调整失败");
+        }
+        return response;
     }
 
     @ApiOperation("Upload product image")

@@ -15,23 +15,21 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @ApiOperation("Get company information")
+    @ApiOperation("获取企业信息")
     @GetMapping("/{companyId}")
     public Company getCompanyById(@PathVariable Integer companyId) {
         return companyService.getCompanyById(companyId);
     }
 
-    @ApiOperation("Update company information")
+    @ApiOperation("更新企业信息")
     @PutMapping
-    public String updateCompany(@RequestBody Company company) {
-        boolean result = companyService.updateCompany(company);
-        return result ? "Update successful" : "Update failed";
+    public boolean updateCompany(@RequestBody Company company) {
+        return companyService.updateCompany(company);
     }
 
-    @ApiOperation("Add company information")
+    @ApiOperation("添加企业信息")
     @PostMapping
-    public String addCompany(@RequestBody Company company) {
-        boolean result = companyService.addCompany(company);
-        return result ? "Add successful" : "Add failed";
+    public boolean addCompany(@RequestBody Company company) {
+        return companyService.addCompany(company);
     }
 }

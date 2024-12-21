@@ -13,13 +13,13 @@ public interface CompanyMapper extends BaseMapper<Company> {
 
     // 更新企业信息
     @Update("UPDATE xmut_company SET company_name = #{companyName}, address = #{address}, " +
-            "contact_name = #{contactName}, contact_phone = #{contactPhone}, update_time = NOW() " +
-            "WHERE company_id = #{companyId}")
+            "contact_name = #{contactName}, contact_phone = #{contactPhone}, email = #{email}, " +
+            "update_time = NOW() WHERE company_id = #{companyId}")
     int updateCompany(Company company);
 
     // 添加企业信息
-    @Insert("INSERT INTO xmut_company(company_name, address, contact_name, contact_phone, create_time) " +
-            "VALUES(#{companyName}, #{address}, #{contactName}, #{contactPhone}, NOW())")
+    @Insert("INSERT INTO xmut_company(company_name, address, contact_name, contact_phone, email, create_time) " +
+            "VALUES(#{companyName}, #{address}, #{contactName}, #{contactPhone}, #{email}, NOW())")
     @Options(useGeneratedKeys = true, keyProperty = "companyId")
     int addCompany(Company company);
 }

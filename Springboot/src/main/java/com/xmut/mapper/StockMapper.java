@@ -5,6 +5,7 @@ import com.xmut.entity.Stock;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StockMapper extends BaseMapper<Stock> {
@@ -35,4 +36,19 @@ public interface StockMapper extends BaseMapper<Stock> {
     // 删除库存记录
     @Delete("DELETE FROM xmut_stock WHERE id = #{id}")
     int deleteStock(@Param("id") Integer id);
+
+    // 获取带仓库名称的库存信息
+    @Select("SELECT s.*, w.warehouse_name, p.product_name " +
+            "FROM xmut_stock s " +
+            "LEFT JOIN xmut_warehouse w ON s.warehouse_id = w.warehouse_id " +
+            "LEFT JOIN xmut_product p ON s.product_id = p.product_id " +
+            "WHERE s.product_id = #{productId}")
+    List<Map<String, Object>> getStockDetailsByProductId(@Param("productId") Integer productId);
+
+    // 检查库存是否充足
+    @Select("SELECT CASE WHEN stock_quantity >= #{quantity} THEN 1 ELSE 0 END " +
+            "FROM xmut_stock WHERE product_id = #{productId} AND warehouse_id = #{warehouseId}")
+    boolean checkStockAvailable(@Param("productId") Integer productId, 
+                              @Param("warehouseId") Integer warehouseId,
+                              @Param("quantity") Integer quantity);
 }

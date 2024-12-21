@@ -7,7 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "仓库管理")
 @RestController
@@ -19,28 +21,61 @@ public class WarehouseController {
 
     @ApiOperation("Get all warehouses")
     @GetMapping
-    public List<Warehouse> getAllWarehouses() {
-        return warehouseService.getAllWarehouses();
+    public Map<String, Object> getAllWarehouses() {
+        try {
+            List<Warehouse> warehouses = warehouseService.getAllWarehouses();
+            return Map.of(
+                "code", 200,
+                "data", warehouses,
+                "message", "获取成功"
+            );
+        } catch (Exception e) {
+            return Map.of(
+                "code", 500,
+                "message", "获取仓库列表失败"
+            );
+        }
     }
 
     @ApiOperation("Add warehouse")
     @PostMapping
-    public String addWarehouse(@RequestBody Warehouse warehouse) {
-        boolean result = warehouseService.addWarehouse(warehouse);
-        return result ? "Add successful" : "Add failed";
+    public Map<String, Object> addWarehouse(@RequestBody Warehouse warehouse) {
+        try {
+            warehouse.setCreateTime(LocalDateTime.now());
+            boolean result = warehouseService.addWarehouse(warehouse);
+            return result ? 
+                Map.of("code", 200, "message", "添加成功") :
+                Map.of("code", 500, "message", "添加失败");
+        } catch (Exception e) {
+            return Map.of("code", 500, "message", "添加失败：" + e.getMessage());
+        }
     }
 
     @ApiOperation("Update warehouse information")
-    @PutMapping
-    public String updateWarehouse(@RequestBody Warehouse warehouse) {
-        boolean result = warehouseService.updateWarehouse(warehouse);
-        return result ? "Update successful" : "Update failed";
+    @PutMapping("/{warehouseId}")
+    public Map<String, Object> updateWarehouse(@PathVariable Integer warehouseId, @RequestBody Warehouse warehouse) {
+        try {
+            warehouse.setWarehouseId(warehouseId);
+            warehouse.setUpdateTime(LocalDateTime.now());
+            boolean result = warehouseService.updateWarehouse(warehouse);
+            return result ? 
+                Map.of("code", 200, "message", "更新成功") :
+                Map.of("code", 500, "message", "更新失败");
+        } catch (Exception e) {
+            return Map.of("code", 500, "message", "更新失败：" + e.getMessage());
+        }
     }
 
     @ApiOperation("Delete warehouse")
     @DeleteMapping("/{warehouseId}")
-    public String deleteWarehouse(@PathVariable Integer warehouseId) {
-        boolean result = warehouseService.deleteWarehouse(warehouseId);
-        return result ? "Delete successful" : "Delete failed";
+    public Map<String, Object> deleteWarehouse(@PathVariable Integer warehouseId) {
+        try {
+            boolean result = warehouseService.deleteWarehouse(warehouseId);
+            return result ? 
+                Map.of("code", 200, "message", "删除成功") :
+                Map.of("code", 500, "message", "删除失败");
+        } catch (Exception e) {
+            return Map.of("code", 500, "message", "删除失败：" + e.getMessage());
+        }
     }
 }

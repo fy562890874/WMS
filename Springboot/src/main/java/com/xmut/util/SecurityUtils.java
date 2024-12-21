@@ -1,16 +1,17 @@
 package com.xmut.util;
 
 import com.xmut.entity.User;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.xmut.service.UserService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SecurityUtils {
     
     public static User getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof User) {
-            return (User) authentication.getPrincipal();
+        Integer userId = UserContext.getUserId();
+        if (userId == null) {
+            return null;
         }
-        return null;
+        return ApplicationContextProvider.getBean(UserService.class).getById(userId);
     }
 }

@@ -1,17 +1,28 @@
 package com.xmut.util;
 
 public class UserContext {
-    private static final ThreadLocal<Integer> userIdHolder = new ThreadLocal<>();
+    private static final ThreadLocal<Integer> userIdContext = new ThreadLocal<>();
+    private static final ThreadLocal<String> usernameContext = new ThreadLocal<>();
 
     public static void setUserId(Integer userId) {
-        userIdHolder.set(userId);
+        userIdContext.set(userId);
+    }
+
+    public static void setUserIdAndName(Integer userId, String username) {
+        userIdContext.set(userId);
+        usernameContext.set(username);
     }
 
     public static Integer getUserId() {
-        return userIdHolder.get();
+        return userIdContext.get();
+    }
+
+    public static String getUsername() {
+        return usernameContext.get();
     }
 
     public static void clear() {
-        userIdHolder.remove();
+        userIdContext.remove();
+        usernameContext.remove();
     }
 }

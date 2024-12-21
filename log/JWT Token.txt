@@ -1,0 +1,220 @@
+我将通过以下步骤来解决这个问题：
+
+1. 添加一个`UserContext`工具类来存储和获取当前用户ID
+2. 修改`JwtInterceptor`和`SecurityUtils`来配合使用`UserContext`
+3. 修改`UserServiceImpl`中的`getCurrentUser`方法
+
+### [UserContext.java](file:///e:/WMS/Springboot/src/main/java/com/xmut/util/UserContext.java)
+
+创建一个新的工具类来管理当前用户上下文：
+
+```java
+
+
+package com.xmut.util;
+
+public class UserContext {
+    private static final ThreadLocal<Integer> userIdContext = new ThreadLocal<>();
+
+    public static void setUserId(Integer userId) {
+        userIdContext.set(userId);
+    }
+
+    public static Integer getUserId() {
+        return userIdContext.get();
+    }
+
+    public static void clear() {
+        userIdContext.remove();
+    }
+}
+```
+
+### [SecurityUtils.java](file:///e:/WMS/Springboot/src/main/java/com/xmut/util/SecurityUtils.java)
+
+修改`SecurityUtils`来使用`UserContext`：
+
+```java
+
+
+已进行更改。
+
+package com.xmut.util;
+
+import com.xmut.entity.User;
+import com.xmut.service.UserService;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SecurityUtils {
+    
+    public static User getCurrentUser() {
+        Integer userId = UserContext.getUserId();
+        if (userId == null) {
+            return null;
+        }
+        return ApplicationContextProvider.getBean(UserService.class).getById(userId);
+    }
+}
+```
+
+### [JwtInterceptor.java](file:///e:/WMS/Springboot/src/main/java/com/xmut/config/JwtInterceptor.java)
+
+修改拦截器，在`preHandle`中保存用户ID到上下文：
+
+```java
+
+
+已进行更改。
+
+package com.xmut.config;
+
+import com.xmut.entity.User;
+import com.xmut.service.UserService;
+import com.xmut.util.JwtUtils;
+import com.xmut.util.UserContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Component
+public class JwtInterceptor implements HandlerInterceptor {
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtInterceptor.class);
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        String requestURI = request.getRequestURI();
+        logger.debug("当前请求URI: {}", requestURI);
+        
+        if (requestURI.equals("/auth/login") || requestURI.equals("/auth/logout") || requestURI.equals("/auth/refresh-token")) {
+            return true;
+        }
+
+        String token = request.getHeader("Authorization");
+        if (token == null || token.isEmpty()) {
+            sendUnauthorizedResponse(response, "未登录");
+            return false;
+        }
+
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
+        try {
+            Integer userId = jwtUtils.getUserIdFromToken(token);
+            logger.debug("从token中解析出的userId: {}", userId);
+            
+            User user = userService.getById(userId);
+            if (user == null) {
+                sendUnauthorizedResponse(response, "用户不存在");
+                return false;
+            }
+            
+            if (!user.getStatus()) {
+                sendForbiddenResponse(response, "用户已被禁用");
+                return false;
+            }
+            
+            // 将用户ID存入上下文
+            UserContext.setUserId(userId);
+            logger.debug("已将用户ID: {} 设置到上下文中", userId);
+            return true;
+            
+        } catch (Exception e) {
+            logger.error("Token验证失败", e);
+            sendUnauthorizedResponse(response, "token无效");
+            return false;
+        }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        UserContext.clear();
+        logger.debug("已清除用户上下文");
+    }
+
+    private void sendUnauthorizedResponse(HttpServletResponse response, String message) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        sendJsonResponse(response, 401, message);
+    }
+
+    private void sendForbiddenResponse(HttpServletResponse response, String message) throws IOException {
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        sendJsonResponse(response, 403, message);
+    }
+
+    private void sendJsonResponse(HttpServletResponse response, int code, String message) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(String.format("{\"code\":%d,\"message\":\"%s\"}", code, message));
+    }
+}
+```
+
+### [WebConfig.java](file:///e:/WMS/Springboot/src/main/java/com/xmut/config/WebConfig.java)
+
+确保已注册JWT拦截器：
+
+```java
+
+
+已进行更改。
+
+package com.xmut.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    
+    private final JwtInterceptor jwtInterceptor;
+    
+    public WebConfig(JwtInterceptor jwtInterceptor) {
+        this.jwtInterceptor = jwtInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwtInterceptor)
+                .addPathPatterns("/**")         // 拦截所有请求
+                .excludePathPatterns("/auth/**"); // 不拦截登录相关的请求
+    }
+}
+```
+
+### 工作流程说明
+
+1. 用户登录后获取Token
+2. 后续请求携带Token在Header中
+3. `JwtInterceptor`拦截请求，验证Token并从中获取用户ID
+4. 将用户ID存储在`UserContext`中（基于ThreadLocal）
+5. 在业务处理过程中，可以通过`SecurityUtils.getCurrentUser()`获取当前用户信息
+6. 请求完成后，`JwtInterceptor`的`afterCompletion`方法清理ThreadLocal中的用户信息
+
+这样修改后，只要前端正确携带Token发起请求，后端就能正确获取到当前用户信息，从而解决"当前用户为空"的问题。
+
+在`UserServiceImpl`中的`getCurrentUser`方法不需要修改，因为它已经通过`SecurityUtils.getCurrentUser()`来获取当前用户了。
+
+注意确保：
+1. 前端在请求头中正确设置了Token（`Authorization: Bearer <token>`）
+2. Token未过期且有效
+3. Token中包含的用户ID在数据库中存在且状态正常
+
+这样的实现方式是线程安全的，且能正确处理并发请求。
+
+已进行更改。

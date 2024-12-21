@@ -28,6 +28,9 @@ public class Company {
     @ApiModelProperty(value = "联系电话")
     private String contactPhone;
 
+    @ApiModelProperty(value = "电子邮箱")
+    private String email;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 

@@ -13,6 +13,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Api(tags = "认证管理")
 @RestController
@@ -47,15 +48,24 @@ public class LoginController {
             System.out.println("密码匹配结果: " + passwordMatches);
             if (passwordMatches) {
                 String token = jwtUtils.generateToken(user.getUserId());
+                
+                Map<String, Object> userInfo = new HashMap<>();
+                userInfo.put("userId", user.getUserId());
+                userInfo.put("username", user.getUsername());
+                userInfo.put("realName", user.getRealName());
+                userInfo.put("status", user.getStatus());
+                userInfo.put("role", user.getRole());
+                userInfo.put("isSuperAdmin", user.getRole() == 1);
+                
                 Map<String, Object> data = new HashMap<>();
                 data.put("token", token);
-                data.put("userInfo", user);
-                Map<String, Object> response = new HashMap<>();
-                response.put("code", 200);
-                response.put("message", "登录成功");
-                response.put("data", data);
-                System.out.println("登录成功: " + response);
-                return response;
+                data.put("userInfo", userInfo);
+                
+                return Map.of(
+                    "code", 200,
+                    "message", "登录成功",
+                    "data", data
+                );
             } else {
                 System.out.println("密码不匹配或Base64解码失败");
                 Map<String, Object> response = new HashMap<>();

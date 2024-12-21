@@ -20,8 +20,6 @@ public interface UserService extends IService<User> {
     @Transactional
     boolean resetPassword(Integer userId, String password);
     @Transactional
-    boolean assignRoles(Integer userId, List<Integer> roleIds);
-    @Transactional
     boolean enableUser(Integer userId);
     @Transactional
     boolean disableUser(Integer userId);
@@ -38,6 +36,12 @@ public interface UserService extends IService<User> {
     User findByUsername(String username);
     boolean checkPassword(User user, String password);
     
-    List<Integer> getUserRoles(Integer userId);
+    // 移除这些方法，因为不再需要单独的角色表
+    // boolean assignRoles(Integer userId, List<Integer> roleIds);
+    
+    // 修改判断超级管理员的方法
+    boolean isSuperAdmin(User user);
+    
+    // 保留这个方法但修改实现
     boolean isAdmin(Integer userId);
 }
